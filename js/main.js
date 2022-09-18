@@ -1,6 +1,10 @@
 function randomInt(from, to) {
-  const result = from + Math.random() * (from - to + 1);
-  return Math.floor(result);
+  if (from >= 0 && to >= 0) {
+    const result = from + Math.random() * (from - to + 1);
+    return Math.floor(result);
+  } else {
+    print('Numbers should be greater or equals 0');
+  }
 }
 
 randomInt(0, 100);
