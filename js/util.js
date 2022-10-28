@@ -1,7 +1,8 @@
 function getRandomPositiveInteger(from, to) {
   if (from >= 0 && to >= 0) {
-    const result = from + Math.random() * (from + to + 1);
-    return Math.floor(result);
+    from = Math.ceil(from);
+    to = Math.floor(to);
+    return Math.floor(Math.random() * (to - from + 1)) + from;
   } else {
     throw new Error('Numbers should be greater or equals 0');
   }
