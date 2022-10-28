@@ -1,4 +1,4 @@
-import { getRandomPositiveInteger } from './util';
+import { getRandomPositiveInteger } from './util.js';
 
 const NAMES = [
   'Гэр',
@@ -25,14 +25,8 @@ const DESCRIPTIONS = [
   'Ладно.'
 ];
 
-const usedId = [];
-
 const generatedId = () => {
-  let tempId = getRandomPositiveInteger(0, 10000);
-  while (tempId in usedId) {
-    tempId = getRandomPositiveInteger(0, 10000);
-  }
-  usedId.push(tempId);
+  getRandomPositiveInteger(0, 10000000);
 };
 
 const generatedComments =  (countOfComments) => {
@@ -47,15 +41,15 @@ const generatedComments =  (countOfComments) => {
       }
     );
   }
+  return comments;
 };
 
 const generatedPosts = (countOfPosts) => {
   const posts = [];
-
-  for (let i = 0; i < countOfPosts; i++) {
+  for (let i = 1; i <= countOfPosts; i++) {
     posts.push(
       {
-        id: i,
+        id: generatedId(),
         url: `photos/${i}.jpg`,
         description: DESCRIPTIONS[getRandomPositiveInteger(0, DESCRIPTIONS.length - 1)],
         likes: getRandomPositiveInteger(15, 200),
