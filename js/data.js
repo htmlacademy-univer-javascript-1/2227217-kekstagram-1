@@ -53,7 +53,7 @@ const generatedPosts = (countOfPosts) => {
         url: `photos/${i}.jpg`,
         description: DESCRIPTIONS[getRandomPositiveInteger(0, DESCRIPTIONS.length - 1)],
         likes: getRandomPositiveInteger(15, 200),
-        comments: generatedComments(10)
+        comments: generatedComments(getRandomPositiveInteger(1, 25))
       }
     );
   }

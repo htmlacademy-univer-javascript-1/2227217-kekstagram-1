@@ -1,5 +1,5 @@
 import { generatedPosts } from './data.js';
-import { addBigPicture, bigPicture } from './big_pictures.js';
+import { addBigPicture, bigPicture, resetComments} from './big_pictures.js';
 const pictureTemplate = document.querySelector('#picture').content;
 const newPictureTemplate = pictureTemplate.querySelector('.picture');
 const pictures = document.querySelector('.pictures');
@@ -14,16 +14,24 @@ posts.forEach((post) => {
   clone.querySelector('.picture__comments').textContent = post.comments.length;
   documentFragment.appendChild(clone);
   clone.addEventListener('click', () => {
+    deleteComments();
     addBigPicture(post);
   });
 });
 
+function deleteComments() {
+  for (let i = 0; document.querySelectorAll('.social__comment').length; i++) {
+    document.querySelector('.social__comment').remove();
+  }
+}
+
 const closeBigPicture = () => {
+  deleteComments();
   bigPicture.classList.add('hidden');
   bigPicture.querySelector('.social__comment-count').classList.remove('hidden');
   bigPicture.querySelector('.comments-loader').classList.remove('hidden');
   document.querySelector('body').classList.remove('modal-open');
-  bigPicture.querySelector('.social__comments').replaceChildren();
+  resetComments();
 };
 
 bigPicture.querySelector('.big-picture__cancel').addEventListener('click', () => {
