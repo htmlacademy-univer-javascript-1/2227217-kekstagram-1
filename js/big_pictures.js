@@ -30,9 +30,20 @@ const genFiveComments = (comments) => {
   }
 };
 
+
 const slicePost = (comments) => {
   genFiveComments(comments.slice(loadedCommentsCounter, loadedCommentsCounter + 5));
   document.querySelector('.current-comments-count').textContent = loadedCommentsCounter;
+};
+
+const loadFiveCmts = (evt) => {
+  evt.preventDefault();
+  slicePost(postComments);
+};
+
+const resetComments = () => {
+  loadedCommentsCounter = 0;
+  postCommentsCounter = 0;
 };
 
 const addBigPicture = (post) => {
@@ -47,15 +58,5 @@ const addBigPicture = (post) => {
   bigPicture.querySelector('.social__caption').textContent = post.description;
   document.querySelector('body').classList.add('modal-open');
 };
-
-function loadFiveCmts(evt) {
-  evt.preventDefault();
-  slicePost(postComments);
-}
-
-function resetComments() {
-  loadedCommentsCounter = 0;
-  postCommentsCounter = 0;
-}
 
 export {addBigPicture, bigPicture, resetComments};

@@ -13,13 +13,13 @@ const pristine = new Pristine(form, {
   errorTextClass: 'img-upload__error'
 });
 
-function stopHandlerWhenFocus(evt) {
+const stopHandlerWhenFocus = (evt) => {
   if (evt.keyCode === 27) {
     evt.stopPropagation();
   }
-}
+};
 
-function hashtagsHandler(value) {
+const hashtagsHandler = (value) => {
   value = value.toLowerCase().trim();
   if (!value) {
     return true;
@@ -32,11 +32,9 @@ function hashtagsHandler(value) {
     }
   }
   return hashtags.length <= 5 && hashtags.length === setOfHashtags.length;
-}
+};
 
-function commentHandler(value) {
-  return value.length <= 140;
-}
+const commentHandler = (value) => value.length <= 140;
 
 pristine.addValidator(imgHashTags, hashtagsHandler, 'Incorrect hashtag');
 pristine.addValidator(imgDescription, commentHandler, 'Comment length must be no more than 140 symbols');

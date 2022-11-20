@@ -1,4 +1,4 @@
-function getRandomPositiveInteger(from, to) {
+const getRandomPositiveInteger = (from, to) => {
   if (from >= 0 && to >= 0) {
     from = Math.ceil(from);
     to = Math.floor(to);
@@ -6,12 +6,10 @@ function getRandomPositiveInteger(from, to) {
   } else {
     throw new Error('Numbers should be greater or equals 0');
   }
-}
+};
 getRandomPositiveInteger(1, 2);
 
-function checkStringLength(str, length) {
-  return str.length <= length;
-}
+const checkStringLength = (str, length) => str.length <= length;
 
 checkStringLength('13513515353153', 30);
 

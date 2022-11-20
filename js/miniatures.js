@@ -4,7 +4,11 @@ const pictureTemplate = document.querySelector('#picture').content;
 const newPictureTemplate = pictureTemplate.querySelector('.picture');
 const pictures = document.querySelector('.pictures');
 const documentFragment = document.createDocumentFragment();
-
+const deleteComments = () => {
+  for (let i = 0; document.querySelectorAll('.social__comment').length; i++) {
+    document.querySelector('.social__comment').remove();
+  }
+};
 const posts = generatedPosts(25);
 
 posts.forEach((post) => {
@@ -19,12 +23,6 @@ posts.forEach((post) => {
   });
 });
 
-function deleteComments() {
-  for (let i = 0; document.querySelectorAll('.social__comment').length; i++) {
-    document.querySelector('.social__comment').remove();
-  }
-}
-
 const closeBigPicture = () => {
   deleteComments();
   bigPicture.classList.add('hidden');
@@ -36,7 +34,7 @@ const closeBigPicture = () => {
 
 bigPicture.querySelector('.big-picture__cancel').addEventListener('click', () => {
   closeBigPicture();
-});
+}, { once: true });
 
 document.addEventListener('keydown', (evt) => {
   if (evt.keyCode === 27) {
