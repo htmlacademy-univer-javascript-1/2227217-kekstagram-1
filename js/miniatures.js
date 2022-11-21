@@ -1,4 +1,4 @@
-import { generatedPosts } from './data.js';
+import { getData } from './api.js';
 import { addBigPicture, bigPicture, resetComments} from './big_pictures.js';
 const pictureTemplate = document.querySelector('#picture').content;
 const newPictureTemplate = pictureTemplate.querySelector('.picture');
@@ -9,19 +9,28 @@ const deleteComments = () => {
     document.querySelector('.social__comment').remove();
   }
 };
-const posts = generatedPosts(25);
 
-posts.forEach((post) => {
-  const clone = newPictureTemplate.cloneNode(true);
-  clone.querySelector('.picture__img').src = post.url;
-  clone.querySelector('.picture__likes').textContent = post.likes;
-  clone.querySelector('.picture__comments').textContent = post.comments.length;
-  documentFragment.appendChild(clone);
-  clone.addEventListener('click', () => {
-    deleteComments();
-    addBigPicture(post);
+const generateError = (message) => {
+  const error = document.querySelector('#error').content.querySelector('section').cloneNode(true);
+  error.querySelector('h2').textContent = message;
+  document.querySelector('body').append(error);
+};
+
+const renderPosts = (posts) => {
+  posts.forEach((post) => {
+    const clone = newPictureTemplate.cloneNode(true);
+    clone.querySelector('.picture__img').src = post.url;
+    clone.querySelector('.picture__likes').textContent = post.likes;
+    clone.querySelector('.picture__comments').textContent = post.comments.length;
+    documentFragment.appendChild(clone);
+    clone.addEventListener('click', () => {
+      deleteComments();
+      addBigPicture(post);
+    });
   });
-});
+  pictures.appendChild(documentFragment);
+};
+
 
 const closeBigPicture = () => {
   deleteComments();
@@ -42,5 +51,4 @@ document.addEventListener('keydown', (evt) => {
   }
 });
 
-
-pictures.appendChild(documentFragment);
+getData(renderPosts, generateError);
