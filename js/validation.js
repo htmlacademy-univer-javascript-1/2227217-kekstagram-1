@@ -42,9 +42,6 @@ pristine.addValidator(imgDescription, commentHandler, 'Comment length must be no
 imgHashTags.onkeydown = stopHandlerWhenFocus;
 imgDescription.onkeydown = stopHandlerWhenFocus;
 
-form.addEventListener('submit', (evt) => {
-  const isValid = pristine.validate();
-  if (!isValid) {
-    evt.preventDefault();
-  }
-});
+const isValid = () => pristine.validate();
+
+export { isValid };
