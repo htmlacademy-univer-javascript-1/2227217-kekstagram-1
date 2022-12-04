@@ -13,7 +13,7 @@ const pristine = new Pristine(form, {
   errorTextClass: 'img-upload__error'
 });
 
-const stopHandlerWhenFocus = (evt) => {
+const stopHandlerWhenFocused = (evt) => {
   if (evt.keyCode === 27) {
     evt.stopPropagation();
   }
@@ -39,8 +39,8 @@ const commentHandler = (value) => value.length <= 140;
 pristine.addValidator(imgHashTags, hashtagsHandler, 'Incorrect hashtag');
 pristine.addValidator(imgDescription, commentHandler, 'Comment length must be no more than 140 symbols');
 
-imgHashTags.onkeydown = stopHandlerWhenFocus;
-imgDescription.onkeydown = stopHandlerWhenFocus;
+imgHashTags.onkeydown = stopHandlerWhenFocused;
+imgDescription.onkeydown = stopHandlerWhenFocused;
 
 const isValid = () => pristine.validate();
 
